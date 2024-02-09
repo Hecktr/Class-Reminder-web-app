@@ -1,26 +1,23 @@
-        function notifyMe() {
-  if (!("Notification" in window)) {
-    // Check if the browser supports notifications
-    alert("This browser does not support desktop notification");
-  } else if (Notification.permission === "granted") {
-    // Check whether notification permissions have already been granted;
-    // if so, create a notification
-    const notification = new Notification("Hi there!");
-    // …
-  } else if (Notification.permission !== "denied") {
-    // We need to ask the user for permission
-    Notification.requestPermission().then((permission) => {
-      // If the user accepts, let's create a notification
-      if (permission === "granted") {
-        const notification = new Notification("Hi there!");
-        // …
-      }
-    });
-  }
+function setAlert() {
+    var timeInput = document.getElementById("time").value;
+    var timeArray = timeInput.split(":");
+    var hours = parseInt(timeArray[0]);
+    var minutes = parseInt(timeArray[1]);
+    var seconds = parseInt(timeArray[2]);
 
-  // At last, if the user has denied notifications, and you
-  // want to be respectful there is no need to bother them anymore.
+    var currentTime = new Date();
+    var hoursDiff = hours - currentTime.getHours();
+    var minutesDiff = minutes - currentTime.getMinutes();
+    var secondsDiff = seconds - currentTime.getSeconds();
+
+    var milliseconds = (hoursDiff * 3600 + minutesDiff * 60 + secondsDiff) * 1000;
+
+    if (milliseconds < 0) {
+        alert("Invalid time: Please enter a time in the future.");
+        return;
+    }
+
+    setTimeout(function() {
+        new Notification("My Great Song");
+    }, milliseconds);
 }
-        function notif(){
-            const notification = new Notification("Hi there!");
-        }

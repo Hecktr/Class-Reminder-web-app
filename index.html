@@ -3,57 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Notification Demo</title>
+<title>Alert at Specific Time</title>
 <style>
     body {
         font-family: Arial, sans-serif;
         background-color: #f4f4f4;
+        text-align: center;
         margin: 0;
         padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
     }
-
+    .container {
+        margin-top: 100px;
+    }
+    label {
+        font-size: 18px;
+    }
+    input[type="text"] {
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 200px;
+    }
     button {
         padding: 10px 20px;
+        font-size: 16px;
         background-color: #007bff;
         color: #fff;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s ease;
     }
-
     button:hover {
         background-color: #0056b3;
     }
 </style>
 </head>
 <body>
-    <script>
-        function notifyMe(notificationTime) {
-            if (!("Notification" in window)) {
-                alert("This browser does not support desktop notification");
-            } else if (Notification.permission === "granted") {
-                setTimeout(() => {
-                    const notification = new Notification("Hi there!");
-                }, notificationTime);
-            } else if (Notification.permission !== "denied") {
-                Notification.requestPermission().then((permission) => {
-                    if (permission === "granted") {
-                        setTimeout(() => {
-                            const notification = new Notification("Hi there!");
-                        }, notificationTime);
-                    }
-                });
-            }
-        }
-    </script>
-    <button onclick="notifyMe(5000)">Send Notification in 5 Seconds</button>
-    <button onclick="notifyMe(10000)">Send Notification in 10 Seconds</button>
-    <!-- Add more buttons for different times as needed -->
+
+<div class="container">
+    <h2>Set an Alert at Specific Time</h2>
+
+    <label for="time">Enter the time (in HH:MM:SS format):</label>
+    <br>
+    <input type="text" id="time">
+    <br>
+    <button onclick="setAlert()">Set Alert</button>
+    <button onclick="notifRequest()">Request Permission</button>
+</div>
+
+<script src="script.js"></script>
+<script src="notif.js"></script>
+
 </body>
 </html>
